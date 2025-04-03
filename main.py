@@ -3,9 +3,19 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import pickle
 import json
+from fastapi.middleware.cors import CORSMiddleware #
 
 ## Creating a Fastapi object
 app = FastAPI()
+
+# Add this right after creating `app`
+app.add_middleware(
+CORSMiddleware,
+allow_origins=["http://localhost:8001"], # or ["*"] for development
+allow_credentials=True,
+allow_methods=["*"],
+allow_headers=["*"],
+)
 
 ## Using Pydantic lib, defining the data type for all the inputs
 class model_input(BaseModel):
